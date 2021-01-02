@@ -1,0 +1,19 @@
+RECURSOS {
+    100,hackatondeprogramacao,competicao,(13..100,0,M,[timido,competitivo],(C,Java));
+    200,jogointerativodevariosniveis,jogo,(10..100,0,M,[distraido, extrovertida],(C,Java,Haskell,Python));
+    300,workshopcomprogramadorprofissional,workshop,(16..100,5,M,[dedicado,interessado,concentrado],(C,Java,Haskell,Python,PROLOG,SQL));
+    400,aulapraticacomresolucaodeficha,aula,(18..50,5,M,[concentrado,timido,persistente],(C,Java,Haskell,Python,PROLOG,SQL));
+    500,acompanhamentoindividual,aula,(14..50,5,M,[desconcentrado,dificuldades,persistente],(C,Java,Haskell,Python,PROLOG,SQL));
+}
+
+ALUNOS {
+    A85400,21,(0,-1);
+    A85919,48,[competitivo,interessado,dedicado];
+    A66869,29,[extrovertida,persistente,dificuldades];
+    A85813,21,[concentrado,interessado];
+    A85814,16,[timido,dificuldades];
+}
+
+?find RECURSOS TOTEACH poo TO A85400;
+?find (filme,jogo) TOTEACH poo;
+?find ALUNOS TOTEACH 100;
