@@ -19,7 +19,35 @@ public class Emocao {
                 this.taskPeople = 0;
                 this.activeReflective = -4;
                 break;
+            case "Extrovertido":
+                this.taskPeople = 5;
+                this.activeReflective = -4;
+            case "Distraido":
+                this.taskPeople = 3;
+                this.activeReflective = 3;
+            case "Dedicado":
+            case "Interessado":
+                this.taskPeople = -3;
+                this.activeReflective = 0;
+                break;
+            case "Concentrado":
+                this.taskPeople = -3;
+                this.activeReflective = 2;
+                break;
+            case "Desconcentrado":
+                this.taskPeople = 3;
+                this.activeReflective = -2;
+                break;
+            case "Persistente":
+                this.taskPeople = -3;
+                this.activeReflective = -2;
+                break;
+            case "Dificuldades":
+                this.taskPeople = 4;
+                this.activeReflective = 1;
+                break;
             default:
+                System.out.println("[AVISO] Emoção não reconhecida: " + emo + " (Ignorada)");
                 this.taskPeople=0;
                 this.activeReflective=0;
                 break;

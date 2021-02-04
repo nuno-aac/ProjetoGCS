@@ -77,13 +77,6 @@ public class AprendizagemBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInteracao(AprendizagemParser.InteracaoContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitTempo(AprendizagemParser.TempoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

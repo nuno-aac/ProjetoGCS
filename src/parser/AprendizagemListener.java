@@ -92,16 +92,6 @@ public interface AprendizagemListener extends ParseTreeListener {
 	 */
 	void exitIdade_range(AprendizagemParser.Idade_rangeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AprendizagemParser#interacao}.
-	 * @param ctx the parse tree
-	 */
-	void enterInteracao(AprendizagemParser.InteracaoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AprendizagemParser#interacao}.
-	 * @param ctx the parse tree
-	 */
-	void exitInteracao(AprendizagemParser.InteracaoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link AprendizagemParser#tempo}.
 	 * @param ctx the parse tree
 	 */

@@ -116,18 +116,6 @@ public class AprendizagemBaseListener implements AprendizagemListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInteracao(AprendizagemParser.InteracaoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInteracao(AprendizagemParser.InteracaoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTempo(AprendizagemParser.TempoContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -5,15 +5,13 @@ import java.util.ArrayList;
 public class Atributos {
     private int idadeMax;
     private int idadeMin;
-    private int interacao;
     private char tempo;
     private ArrayList<Emocao> listaEmocional;
     private ArrayList<String> cprogs;
 
-    public Atributos(int idadeMin, int idadeMax, int interacao, char tempo){
+    public Atributos(int idadeMin, int idadeMax, char tempo){
         this.idadeMax = idadeMax;
         this.idadeMin = idadeMin;
-        this.interacao = interacao;
         this.tempo = tempo;
         this.listaEmocional = new ArrayList<>();
         this.cprogs = new ArrayList<>();
@@ -22,7 +20,6 @@ public class Atributos {
     public Atributos(){
         this.idadeMax = 0;
         this.idadeMin = 0;
-        this.interacao = 0;
         this.tempo = 'S';
         this.listaEmocional = new ArrayList<>();
         this.cprogs = new ArrayList<>();
@@ -38,10 +35,6 @@ public class Atributos {
 
     public int getIdadeMin() {
         return idadeMin;
-    }
-
-    public int getInteracao() {
-        return interacao;
     }
 
     public ArrayList<Emocao> getListaEmocional() {
@@ -64,10 +57,6 @@ public class Atributos {
         this.tempo = tempo;
     }
 
-    public void setInteracao(int interacao) {
-        this.interacao = interacao;
-    }
-
     public void addEmocao(Emocao emocao){
         this.listaEmocional.add(emocao);
     }
@@ -81,7 +70,6 @@ public class Atributos {
         return "Atributos{" +
                 "idadeMax=" + idadeMax +
                 ", idadeMin=" + idadeMin +
-                ", interacao=" + interacao +
                 ", tempo=" + tempo +
                 ", listaEmocional=" + listaEmocional +
                 ", cprogs=" + cprogs +

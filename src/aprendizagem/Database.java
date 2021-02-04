@@ -88,7 +88,11 @@ public class Database {
         return temp;
     }
 
-    public void findRecursosSingleAluno(ArrayList<String> tipos, String cprog, Aluno aluno){
+    public int aptToPercentage(Double apt){
+        return (int) -Math.floor(((100*(apt-Math.sqrt(200)))/Math.sqrt(200)));
+    }
+
+    public void findRecursosSingleAluno(ArrayList<String> tipos, String cprog, Aluno aluno, int line){
         Emocao avgAluno = aluno.getAvgEmocao();
         Emocao avgRecurso;
         double dist;
@@ -115,14 +119,14 @@ public class Database {
 
         HashMap<Integer,Double> sortedDistances = sortByValue(distancesToRecurso);
 
+        System.out.println("[QUERIE " + line + "] Aqui está a lista de ids de recursos melhores para ensinar o aluno " + aluno.getId()+ " filtrada por " + cprog + ":");
         for (Map.Entry<Integer,Double> en : sortedDistances.entrySet()) {
-            System.out.println("Key = " + en.getKey() +
-                    ", Value = " + en.getValue());
+            System.out.println("-> " + en.getKey() + " (" + aptToPercentage(en.getValue()) + "%)");
         }
 
     }
 
-    public void findAlunosSingleRecurso(Recurso recurso){
+    public void findAlunosSingleRecurso(Recurso recurso,int line){
         Emocao avgRecurso = recurso.getAvgEmocao();
         Emocao avgAluno;
         double dist;
@@ -130,7 +134,6 @@ public class Database {
         HashMap<String,Double> distancesToRecurso = new HashMap<>();
 
         for(Aluno a : alunos) {
-            System.out.println("HERE:" + a.getId());
             avgAluno = a.getAvgEmocao();
             dist = avgRecurso.getEmocaoDistancia(avgAluno);
             distancesToRecurso.put(a.getId(), dist);
@@ -138,10 +141,45 @@ public class Database {
 
         HashMap<String,Double> sortedDistances = sortByValueAluno(distancesToRecurso);
 
+        System.out.println("[QUERIE " + line + "] Aqui está a lista de ids de alunos que serão melhor ensinados pelo recurso " + recurso.getId() + ":");
         for (Map.Entry<String,Double> en : sortedDistances.entrySet()) {
-            System.out.println("Key = " + en.getKey() +
-                    ", Value = " + en.getValue());
+            System.out.println("-> " + en.getKey() + " (" + aptToPercentage(en.getValue()) + "%)");
         }
 
+    }
+
+    public void findRecursosCprog(ArrayList<String> tipos, String cprog, int line){
+        ArrayList<Integer> recByCprog = new ArrayList<>();
+
+        for(Recurso r : recursos){
+            if(r.getAtributos().getCprogs().contains(cprog) && (tipos.contains(r.getTipo()) || tipos.size() == 0)){
+                recByCprog.add(r.getId());
+            }
+        }
+        System.out.println("[QUERIE " + line + "] Aqui está a lista de ids de recursos filtrada por " + cprog + ":");
+        for(int i : recByCprog){
+            System.out.println("-> " + i);
+        }
+
+    }
+
+    public void getSingleAluno(String id, int line){
+        for(Aluno a : alunos){
+            if(a.getId().equals(id)){
+                System.out.println("[QUERY "+ line + "] " + a);
+                return;
+            }
+        }
+        System.out.println("[QUERY " + line + "] Aluno com id " + id + "não existe!");
+    }
+
+    public void getSingleRecurso(int id, int line){
+        for(Recurso r : recursos){
+            if(r.getId() == id){
+                System.out.println("[QUERY "+ line + "] " + r);
+                return;
+            }
+        }
+        System.out.println("[QUERY " + line + "] Recurso com id " + id + " não existe!");
     }
 }

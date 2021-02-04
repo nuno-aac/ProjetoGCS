@@ -63,12 +63,6 @@ public interface AprendizagemVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdade_range(AprendizagemParser.Idade_rangeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AprendizagemParser#interacao}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInteracao(AprendizagemParser.InteracaoContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AprendizagemParser#tempo}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

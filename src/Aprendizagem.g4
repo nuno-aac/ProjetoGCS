@@ -18,7 +18,7 @@ aprendizagem: { Database data = new Database(); }
 recursos returns[ArrayList<Recurso> lista]: { $lista = new ArrayList<>(); }
           recursol[$lista]
           (PVIR recursol[$lista])*
-          PVIR { System.out.println($lista); };
+          PVIR                              { System.out.println("[INFO] Recursos lidos: " + $lista.size()); };
 
 recursol [ArrayList<Recurso> lista]: { Recurso rec = new Recurso(); }
          id VIR                      { rec.setId(Integer.parseInt($id.text)); }
@@ -39,7 +39,6 @@ desc: TEXT;
 atributos returns[Atributos atr]: { $atr = new Atributos(); }
            LEFTPAREN
            idade_range VIR        { $atr.setIdadeMin($idade_range.min); $atr.setIdadeMax($idade_range.max); }
-           interacao VIR          { $atr.setInteracao(Integer.parseInt($interacao.text)); }
            tempo VIR              { $atr.setTempo($tempo.text.charAt(0)); }
            lista_emocional VIR    { for(Emocao e : $lista_emocional.lista){ $atr.addEmocao(e); } }
            cprogs                 { for(String cp : $cprogs.lista){ $atr.addCprog(cp); } }
@@ -49,8 +48,6 @@ idade_range returns[int min, int max]:
              NUM { $max = $NUM.int; }
              RANGE
              NUM { $min = $NUM.int; };
-
-interacao: NUM;
 
 tempo: LONG
      | MEDIUM
@@ -94,7 +91,7 @@ cprog: TEXT;
 alunos returns[ArrayList<Aluno> lista]: { $lista = new ArrayList<>(); }
         aluno[$lista]
         (PVIR aluno[$lista])*
-        PVIR;
+        PVIR                            { System.out.println("[INFO] Alunos lidos: " + $lista.size()); };
 
 aluno [ArrayList<Aluno> lista]: { Aluno al = new Aluno(); }
        ALUNOID VIR              { al.setId($ALUNOID.text); }
@@ -113,9 +110,12 @@ queries[Database d]:
          (querie[d])*;
 
 querie[Database d]:
-      QUESTION FIND recursoquerie TOTEACH cprog TO alunotarget[d] PVIR { d.findRecursosSingleAluno($recursoquerie.lista,$cprog.text,$alunotarget.al); }
-      | QUESTION FIND recursoquerie TOTEACH cprog PVIR
-      | QUESTION FIND ALUNOS TOTEACH recursotarget[d] PVIR             { d.findAlunosSingleRecurso($recursotarget.rec); };
+      QUESTION FIND recursoquerie TOTEACH cprog TO alunotarget[d] PVIR { d.findRecursosSingleAluno($recursoquerie.lista,$cprog.text,$alunotarget.al,$QUESTION.line); }
+      | QUESTION FIND recursoquerie TOTEACH cprog PVIR                 { d.findRecursosCprog($recursoquerie.lista,$cprog.text,$QUESTION.line); }
+      | QUESTION FIND ALUNOS TOTEACH recursotarget[d] PVIR             { d.findAlunosSingleRecurso($recursotarget.rec,$QUESTION.line); }
+      | QUESTION GET ALUNOID PVIR                                      { d.getSingleAluno($ALUNOID.text,$QUESTION.line); }
+      | QUESTION GET id PVIR                                           { d.getSingleRecurso(Integer.parseInt($id.text),$QUESTION.line); };
+
 
 recursoquerie returns[ArrayList<String> lista]: { $lista = new ArrayList<>(); }
              RECURSOS
@@ -153,6 +153,7 @@ ALUNOID: ('A'|'PG')[0-9]+;
 //QUERIES
 QUESTION: '?';
 FIND: [Ff][iI][nN][dD]|[fF];
+GET: [Gg][eE][tT]|[gG];
 TOTEACH: 'TOTEACH';
 TO: 'TO';
 WITH: 'WITH';
